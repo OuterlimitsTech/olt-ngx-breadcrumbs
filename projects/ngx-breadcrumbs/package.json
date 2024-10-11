@@ -1,9 +1,25 @@
 {
-  "name": "ngx-breadcrumbs",
-  "version": "0.0.1",
+  "name": "@outerlimitstech/ngx-breadcrumbs",
+  "version": "18.0.0-beta.1",
+  "description": "Angular breadcrumbs built on the native Angular router - Clone of @exalif/ngx-breadcrumbs",
+  "bugs": "https://github.com/OuterlimitsTech/olt-ngx-breadcrumbs/issues",
+  "homepage": "https://github.com/OuterlimitsTech/olt-ngx-breadcrumbs#readme",
+  "repository": "https://github.com/OuterlimitsTech/olt-ngx-breadcrumbs.git",
+  "license": "MIT",
+  "author": "Chris Straw",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "angular",
+    "breadcrumb",
+    "ngx-breadcrumbs"
+  ],
   "peerDependencies": {
-    "@angular/common": "^18.2.0",
-    "@angular/core": "^18.2.0"
+    "@angular/common": ">=18.0.0",
+    "@angular/core": ">=18.0.0",
+    "@angular/router": ">= 18.0.0",
+    "rxjs": ">= 7.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

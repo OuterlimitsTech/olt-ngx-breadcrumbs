@@ -2,5 +2,5 @@
  * Public API Surface of ngx-breadcrumbs
  */
 
-export * from './lib/ngx-breadcrumbs.service';
-export * from './lib/ngx-breadcrumbs.component';
+export * from './lib/services/index';
+export * from './lib/breadcrumbs.component';

@@ -4,9 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build ngx-breadcrumbs",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "postbuild": "xcopy \"README.md\" \".\\dist\\ngx-breadcrumbs\" /Y"
   },
   "private": true,
   "dependencies": {
