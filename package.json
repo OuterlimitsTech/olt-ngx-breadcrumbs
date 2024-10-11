@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve test-app --port 4209",
     "build": "ng build ngx-breadcrumbs",
-    "watch": "ng build --watch --configuration development",
+    "watch": "ng build ngx-breadcrumbs --watch --configuration development",
     "test": "ng test",
     "postbuild": "xcopy \"README.md\" \".\\dist\\ngx-breadcrumbs\" /Y"
   },

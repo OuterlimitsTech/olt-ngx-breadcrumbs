@@ -1,69 +1,11 @@
-# @outerlimitstech/ngx-breadcrumbs
 
-Angular Library for generating breadcrumbs based on the routing state.
-
-This package is a modified fork of original [@exalif/ngx-breadcrumbs](https://github.com/exalif/angular-libs)
-
-_(The old component was lib-breadcrumbs)_
-
-
-
-## Standalone Usage
-```typescript
-import { BreadcrumbsComponent } from '@outerlimitstech/ngx-breadcrumbs';
-
-@Component({
-  standalone: true,
-  imports: [BreadcrumbsComponent, RouterModule],
-  template: `
-  <header class="fixed-top">    
-    <div  class="p-1 d-none d-md-block bg-primary-subtle bg-gradient">
-      <olt-ngx-breadcrumbs />
-    </div>
-  </header>
-  <div class="app-content">
-    <div>
-      <router-outlet></router-outlet>
-    </div>  
-  </div>  
-  `,
-  styleUrl: './layout.page.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class LayoutComponent  {
+.app-content {
+  padding-left: .5rem;
+  padding-right: .5rem;
+  margin-top: 100px;
 }
-```
-
-## Using Html Template
-```html
-<header class="fixed-top">  
-  <div class="p-1 d-none d-md-block">
-    <olt-ngx-breadcrumbs />
-  </div>
-</header>
-<div>
-  <router-outlet></router-outlet>
-</div> 
-```
-
-## Module Import/Export
-```typescript
-import { BreadcrumbsComponent } from '@outerlimitstech/ngx-breadcrumbs';
-
-@NgModule({
-  declarations: [],
-  imports: [
-    BreadcrumbsComponent
-  ],
-  exports: [
-    BreadcrumbsComponent
-  ]
-export class SharedModule { }  
-```
 
 
-## Example scss
-```scss
 
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
@@ -128,5 +70,3 @@ $breadcrumb-border-radius: 15px !default;
     font-weight: bolder;
   }
 }
-
-```
