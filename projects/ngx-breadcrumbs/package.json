@@ -1,6 +1,6 @@
 {
   "name": "@outerlimitstech/ngx-breadcrumbs",
-  "version": "18.0.0-beta.1",
+  "version": "18.0.0",
   "description": "Angular breadcrumbs built on the native Angular router - Clone of @exalif/ngx-breadcrumbs",
   "bugs": "https://github.com/OuterlimitsTech/olt-ngx-breadcrumbs/issues",
   "homepage": "https://github.com/OuterlimitsTech/olt-ngx-breadcrumbs#readme",
