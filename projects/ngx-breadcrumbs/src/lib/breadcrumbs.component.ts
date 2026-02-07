@@ -7,17 +7,16 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'olt-ngx-breadcrumbs',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  providers: [
-    BreadcrumbsService,
-    { 
-      provide: BreadcrumbsConfig, 
-      useFactory: () => new BreadcrumbsConfig() 
-    }    
-  ],  
-  template: `
+    selector: 'olt-ngx-breadcrumbs',
+    imports: [CommonModule, RouterModule],
+    providers: [
+        BreadcrumbsService,
+        {
+            provide: BreadcrumbsConfig,
+            useFactory: () => new BreadcrumbsConfig()
+        }
+    ],
+    template: `
    <ol *ngIf="crumbs$ | async as crumbs" class="breadcrumbs__container">
       <li *ngFor="let crumb of crumbs; let last = last"
         [ngClass]="{ 'breadcrumbs__item--active': last }"
@@ -28,7 +27,7 @@ import { CommonModule } from '@angular/common';
       </li>
     </ol>
   `,
-  styles: ``
+    styles: ``
 })
 export class BreadcrumbsComponent {
   breadcrumbsService = inject(BreadcrumbsService);

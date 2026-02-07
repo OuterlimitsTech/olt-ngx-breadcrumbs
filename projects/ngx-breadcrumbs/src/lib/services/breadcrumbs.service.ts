@@ -1,5 +1,5 @@
 import { inject, Injectable, Injector } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { BreadcrumbsConfig } from './breadcrumbs.config';
 import { BehaviorSubject, concat, distinct, filter, first, mergeMap, Observable, of, tap, toArray } from 'rxjs';
 import { Breadcrumb } from '../models/breadcrumb';
@@ -12,13 +12,12 @@ import { BreadcrumbsResolver } from './breadcrumbs.resolver';
 export class BreadcrumbsService {
   private breadcrumbs = new BehaviorSubject<Breadcrumb[]>([]);
    private defaultResolver = new BreadcrumbsResolver();
-   
-  private route = inject(ActivatedRoute);
+
   private router = inject(Router);
   private config = inject(BreadcrumbsConfig);
   private injector = inject(Injector);
-  
-  constructor() { 
+
+  constructor() {
     this.initialize();
   }
 
@@ -57,7 +56,7 @@ export class BreadcrumbsService {
     let crumbs$: Observable<Breadcrumb[]>;
     const data = route.routeConfig && route.routeConfig.data;
     const breadcrumbData = data != null ? data['breadcrumbs'] : null;
-    
+
     if (breadcrumbData != null) {
       let resolver: BreadcrumbsResolver;
 
@@ -79,5 +78,5 @@ export class BreadcrumbsService {
 
     return crumbs$;
   }
-  
+
 }
