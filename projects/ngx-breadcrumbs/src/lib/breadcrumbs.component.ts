@@ -15,16 +15,24 @@ import { CommonModule } from '@angular/common';
         }
     ],
     template: `
-   <ol *ngIf="crumbs().length > 0" class="breadcrumbs__container">
-      <li *ngFor="let crumb of crumbs(); let last = last"
-        [ngClass]="{ 'breadcrumbs__item--active': last }"
-        class="breadcrumbs__item"
-      >
-        <a *ngIf="!last" [routerLink]="crumb.path">{{ crumb.text }}</a>
-        <span *ngIf="last">{{ crumb.text }}</span>
-      </li>
-    </ol>
-  `,
+   @if (crumbs().length > 0) {
+     <ol class="breadcrumbs__container">
+       @for (crumb of crumbs(); track crumb; let last = $last) {
+         <li
+           [ngClass]="{ 'breadcrumbs__item--active': last }"
+           class="breadcrumbs__item"
+           >
+           @if (!last) {
+             <a [routerLink]="crumb.path">{{ crumb.text }}</a>
+           }
+           @if (last) {
+             <span>{{ crumb.text }}</span>
+           }
+         </li>
+       }
+     </ol>
+   }
+   `,
     styles: ``
 })
 export class BreadcrumbsComponent {
