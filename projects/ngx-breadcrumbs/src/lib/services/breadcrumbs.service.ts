@@ -1,7 +1,8 @@
-import { inject, Injectable, Injector } from '@angular/core';
+import { DestroyRef, inject, Injectable, Injector, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { BreadcrumbsConfig } from './breadcrumbs.config';
-import { BehaviorSubject, concat, distinct, filter, first, mergeMap, Observable, of, tap, toArray } from 'rxjs';
+import { concat, distinct, filter, first, mergeMap, Observable, of, tap, toArray } from 'rxjs';
 import { Breadcrumb } from '../models/breadcrumb';
 import { BreadcrumbsUtils } from '../utils/breadcrumbs.utils';
 import { BreadcrumbsResolver } from './breadcrumbs.resolver';
@@ -10,12 +11,13 @@ import { BreadcrumbsResolver } from './breadcrumbs.resolver';
   providedIn: 'root'
 })
 export class BreadcrumbsService {
-  private breadcrumbs = new BehaviorSubject<Breadcrumb[]>([]);
-   private defaultResolver = new BreadcrumbsResolver();
+  private breadcrumbs = signal<Breadcrumb[]>([]);
+  private defaultResolver = new BreadcrumbsResolver();
 
   private router = inject(Router);
   private config = inject(BreadcrumbsConfig);
   private injector = inject(Injector);
+  private destroyRef = inject(DestroyRef);
 
   constructor() {
     this.initialize();
@@ -24,6 +26,7 @@ export class BreadcrumbsService {
   private initialize() {
     this.router.events.pipe(
       filter((x) => x instanceof NavigationEnd), // || x['routerEvent'] instanceof NavigationEnd
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe(() => {
       const routeRoot = this.router.routerState.snapshot.root;
 
@@ -39,18 +42,12 @@ export class BreadcrumbsService {
           }
         })
       ).subscribe((crumbs: Breadcrumb[]) => {
-        this.breadcrumbs.next(crumbs);
+        this.breadcrumbs.set(crumbs);
       });
     });
   }
 
-  get crumbs$(): Observable<Breadcrumb[]> {
-    return this.breadcrumbs;
-  }
-
-  public getCrumbs(): Observable<Breadcrumb[]> {
-    return this.crumbs$;
-  }
+  public readonly crumbs = this.breadcrumbs.asReadonly();
 
   private resolveCrumbs(route: ActivatedRouteSnapshot): Observable<Breadcrumb[]> {
     let crumbs$: Observable<Breadcrumb[]>;
